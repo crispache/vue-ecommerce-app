@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-app",
+  "name": "vue-ecommerce-app",
   "private": true,
   "type": "module",
   "scripts": {
