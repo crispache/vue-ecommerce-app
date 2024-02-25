@@ -1,20 +1,20 @@
-import { defaultUserDetail, getUserDetailApi, mapUserToVM, type UserDetailEntity } from "~/api";
+import { defaultQuote, getRandomQuoteApi, mapQuoteToVM, type Quote } from "~/api";
 
-export const useInfoUser = () => {
+export const useQuote = () => {
 
-    let user = reactive<UserDetailEntity>(defaultUserDetail);
+    let quote = reactive<Quote>(defaultQuote);
     const isLoading = ref<boolean>(false);
     const hasError = ref<boolean>(false);
 
-    const getDetailUser = async (id: number) => {
+    const getQuote = async () => {
         try {
             isLoading.value = true;
-            const { data, hasError: hasErrorApi } =  await getUserDetailApi(id);
+            const { data, hasError: hasErrorApi } =  await getRandomQuoteApi();
             
             if(data) {
-                Object.assign(user, mapUserToVM(data));
+                Object.assign(quote, mapQuoteToVM(data));
             } else {
-                user = defaultUserDetail;
+                quote = defaultQuote
             }
 
             if(hasErrorApi) {
@@ -22,7 +22,7 @@ export const useInfoUser = () => {
             }
            
         } catch (error) {
-            user = defaultUserDetail;
+            quote = defaultQuote
             hasError.value = true;
         } finally {
             isLoading.value = false;
@@ -31,11 +31,11 @@ export const useInfoUser = () => {
 
     return {
         // props
-        user,
+        quote,
         isLoading,
         hasError,
 
         // methods
-        getDetailUser,
+        getQuote,
     }
 }

@@ -15,10 +15,10 @@
 </template>
 
 <script setup lang="ts">
-import { vm } from '~/api';
+import type { UserDetailEntity } from '~/api';
 
 // Props
-defineProps<{ user: vm.UserDetailEntity }>()
+defineProps<{ user: UserDetailEntity }>()
 
 </script>
 

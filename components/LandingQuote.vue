@@ -1,15 +1,14 @@
 <template>
     <figure class="quote">
         <blockquote>
-            <p> Words can be like X-rays, if you use them properly—they’ll go through anything. You read and you’re pierced.
-            </p>
-            <figcaption> &mdash; Rumi, <cite>Dummyjson</cite></figcaption>
+            <p> {{  quote.quote  }}</p>
+            <figcaption> &mdash; {{ quote.author }}, <cite>Dummyjson</cite></figcaption>
         </blockquote>
     </figure>
 </template>
 
 <script setup lang="ts">
-
+const { quote } = useQuote();
 </script>
 
 <style lang="scss" scoped>
