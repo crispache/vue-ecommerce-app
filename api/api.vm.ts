@@ -8,11 +8,11 @@ export interface UserDetailEntity {
 }
 
 
-export const createDefaultUserDetail = () => ({
+export const defaultUserDetail = {
     id: 0,
     name: "",
     photoUrl: "",
     email: "",
     phone: "",
     address: "",
-});
+};

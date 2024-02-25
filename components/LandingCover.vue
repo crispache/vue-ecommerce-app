@@ -8,37 +8,8 @@
             </p>
             <v-btn size="x-large" color="secondary">Ver todas las categorias</v-btn>
         </div>
-
         <div class="user-info">
-            <v-card class="my-12 pa-2" min-width="300" width="374" elevation="16">
-                <v-img contain height="250" :src="user.photoUrl" alt="Usuario"></v-img>
-                <v-card-title>{{ user.name }}</v-card-title>
-                <v-card-text class="pa-0">
-                    <v-list lines="two">
-                        <v-list-item :title="user.address" subtitle="Dirección">
-                            <template #prepend>
-                                <v-avatar color="grey-lighten-1">
-                                    <v-icon color="white">mdi-map-marker</v-icon>
-                                </v-avatar>
-                            </template>
-                        </v-list-item>
-                        <v-list-item :title="user.email" subtitle="Email">
-                            <template #prepend>
-                                <v-avatar color="grey-lighten-1">
-                                    <v-icon color="white">mdi-email</v-icon>
-                                </v-avatar>
-                            </template>
-                        </v-list-item>
-                        <v-list-item :title="user.phone" subtitle="Teléfono">
-                            <template #prepend>
-                                <v-avatar color="grey-lighten-1">
-                                    <v-icon color="white">mdi-phone</v-icon>
-                                </v-avatar>
-                            </template>
-                        </v-list-item>
-                    </v-list>
-                </v-card-text>
-            </v-card>
+           <landing-cover-card :user="user"></landing-cover-card>
         </div>
     </section>
 </template>
@@ -47,7 +18,7 @@
 import { vm } from '~/api';
 
 // Props
-const props = defineProps<{ user: vm.UserDetailEntity }>()
+defineProps<{ user: vm.UserDetailEntity }>()
 
 </script>
 

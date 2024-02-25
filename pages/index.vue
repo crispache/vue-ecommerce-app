@@ -3,8 +3,7 @@
 </template>
 
 <script setup lang="ts">
-const { user, isLoading, hasError , getDetailUser} = useInfoUser()
-
-await getDetailUser(1)
+const { user, getDetailUser } = useInfoUser();
+await getDetailUser(1);
 
 </script>

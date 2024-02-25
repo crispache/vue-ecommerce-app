@@ -3,7 +3,7 @@ import { mapUserToVM } from "~/api/api.mapper";
 
 export const useInfoUser = () => {
 
-    const user = ref<vm.UserDetailEntity>(vm.createDefaultUserDetail());
+    let user = reactive<vm.UserDetailEntity>(vm.defaultUserDetail);
     const isLoading = ref<boolean>(false);
     const hasError = ref<boolean>(false);
 
@@ -13,9 +13,9 @@ export const useInfoUser = () => {
             const { data, hasError: hasErrorApi } =  await getUserDetailApi(id);
             
             if(data) {
-                user.value = mapUserToVM(data);
+                Object.assign(user, mapUserToVM(data));
             } else {
-                user.value = vm.createDefaultUserDetail()
+                user = vm.defaultUserDetail;
             }
 
             if(hasErrorApi) {
@@ -23,6 +23,7 @@ export const useInfoUser = () => {
             }
            
         } catch (error) {
+            user = vm.defaultUserDetail;
             hasError.value = true;
         } finally {
             isLoading.value = false;
