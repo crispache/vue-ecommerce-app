@@ -13,7 +13,6 @@ export const useProduct = () => {
 
             if (data) {
                 categories.value = [...data];
-                console.log(categories)
             } else {
                 categories.value = []
             }
