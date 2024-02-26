@@ -6,7 +6,9 @@
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for
                 previewing layouts and visual mockups.
             </p>
-            <v-btn size="x-large" color="secondary">Ver todas las categorias</v-btn>
+            <NuxtLink to="/category">
+                <v-btn size="x-large" color="secondary">Ver todas las categorias</v-btn>
+            </NuxtLink>
         </div>
         <div class="user-info">
            <landing-cover-card :user="user"></landing-cover-card>
