@@ -2,8 +2,10 @@
     <section>
         <h1> Listado de categorías </h1>
         <div class="category-list">
-            <v-card v-for="(category, index) in categories" :key="index" color="indigo" variant="outlined" height="100" width="225" hover>
+            <v-card v-for="(category, index) in categories" :key="index" variant="text" height="255" width="250">
                 <v-card-item>
+                    <v-img contain src="https://dummyimage.com/300x250/dbdede/0011ff.png&" :alt="`Foto de ${category}`"
+                        class="mb-5 cursor-pointer"></v-img>
                     <v-card-title class="text-capitalize">
                         {{ category }}
                     </v-card-title>
