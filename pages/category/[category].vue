@@ -1,12 +1,15 @@
 <template>
     <section>
+        <v-btn prepend-icon="mdi-arrow-left" variant="outlined" class="mb-5" to="/category">
+            Listado de categorías
+        </v-btn>
         <h1> Categoría {{ category }}</h1>
         <div class="total-products">
             <p>Total: {{ totalProducts }}</p>
         </div>
         <div class="product-list">
             <article v-for="(product, index) in products" :key="index">
-                <v-card width="330" height="480" variant="text">
+                <v-card width="330" height="420" variant="text" hover>
                     <v-img contain height="235" :src="product.photoUrl"></v-img>
                     <v-card-item>
                         <v-card-title>{{ product.title }}</v-card-title>
@@ -16,17 +19,12 @@
                         <div class="description">
                             {{ product.description }}
                         </div>
-                          <div class="rating-price">
+                        <div class="rating-price">
                             <v-rating :model-value="product.rating" color="amber" density="compact" half-increments readonly
                                 size="small"></v-rating>
                             <p class="price"> {{ product.price }}</p>
                         </div>
                     </v-card-item>
-                    <v-card-actions>
-                        <v-btn color="primary" class="flex-grow-1" variant="flat" height="48">
-                            Añadir al carrito
-                        </v-btn>
-                    </v-card-actions>
                 </v-card>
             </article>
         </div>
@@ -52,9 +50,8 @@ section {
 
     .total-products {
         font-size: 1.2rem;
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
-
 
     .product-list {
         display: flex;
@@ -63,14 +60,14 @@ section {
 
         .description {
             display: -webkit-box;
-            -webkit-line-clamp: 2; 
-                    line-clamp: 2;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
             -webkit-box-orient: vertical;
             text-overflow: ellipsis;
             overflow: hidden;
             font-size: 0.9rem;
             height: 45px;
-            margin: 0.8rem 0; 
+            margin: 0.8rem 0;
         }
 
         .rating-price {
