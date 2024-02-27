@@ -1,8 +1,9 @@
-import { getCategoriesApi, getProductsByCategoryApi, mapProductCollectionFromApiToVm, type Product } from "~/api";
+import { defaultProductDetail, getCategoriesApi, getProductByIdApi, getProductsByCategoryApi, mapProductCollectionFromApiToVm, mapProductDetailsToVM, mapProductListToVM, type Product, type ProductDetails } from "~/api";
 
 export const useProduct = () => {
 
     const categories = ref<string[]>([]);
+    let product = reactive<ProductDetails>(defaultProductDetail)
     let products = reactive<Product[]>([]);
     const totalProducts = ref<number>(0);
     const isLoading = ref<boolean>(false);
@@ -59,16 +60,42 @@ export const useProduct = () => {
     }
 
 
+    const getProductById = async (id: string) => {
+        try {
+            isLoading.value = true;
+            const { data, hasError: hasErrorApi } = await getProductByIdApi(id);
+
+            if (data) {
+                Object.assign(product, mapProductDetailsToVM(data));
+            } else {
+                product = defaultProductDetail;
+            }
+
+            if (hasErrorApi) {
+                hasError.value = true;
+            }
+
+        } catch (error) {
+            product = defaultProductDetail;
+            hasError.value = true;
+        } finally {
+            isLoading.value = false;
+        }
+    }
+    
+
     return {
         // props
         categories,
         products,
         totalProducts,
+        product,
         isLoading,
         hasError,
 
         // methods
         getCategories,
-        getProductsByCategory
+        getProductsByCategory,
+        getProductById
     }
 }
