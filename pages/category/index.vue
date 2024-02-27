@@ -4,8 +4,10 @@
         <div class="category-list">
             <v-card v-for="(category, index) in categories" :key="index" variant="text" height="255" width="250">
                 <v-card-item>
+                    <NuxtLink :to="`/category/${category}`">
                     <v-img contain src="https://dummyimage.com/300x250/dbdede/0011ff.png&" :alt="`Foto de ${category}`"
                         class="mb-5 cursor-pointer"></v-img>
+                    </NuxtLink>
                     <v-card-title class="text-capitalize">
                         {{ category }}
                     </v-card-title>
