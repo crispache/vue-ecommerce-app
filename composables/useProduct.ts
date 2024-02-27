@@ -1,4 +1,4 @@
-import { defaultProductDetail, getCategoriesApi, getProductByIdApi, getProductsByCategoryApi, mapProductCollectionFromApiToVm, mapProductDetailsToVM, mapProductListToVM, type Product, type ProductDetails } from "~/api";
+import { defaultProductDetail, getCategoriesApi, getProductByIdApi, getProductsByCategoryApi, mapProductCollectionFromApiToVm, mapProductDetailsToVM, type Product, type ProductDetails } from "~/api";
 
 export const useProduct = () => {
 
