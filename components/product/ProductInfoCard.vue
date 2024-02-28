@@ -12,7 +12,7 @@
             </div>
         </v-card-item>
         <v-card-actions>
-            <v-btn color="primary" class="flex-grow-1" variant="flat" height="48">
+            <v-btn color="primary" class="flex-grow-1" variant="flat" height="48" @click="addToCart(product)">
                 Añadir al carrito
             </v-btn>
         </v-card-actions>
@@ -21,7 +21,11 @@
 
 <script setup lang="ts">
 import { type ProductDetails } from "~/api";
-defineProps<{ product: ProductDetails }>()
+import { useCartStore } from "~/store/useCartStore";
+
+defineProps<{ product: ProductDetails }>();
+
+const { addToCart } = useCartStore();
 </script>
 
 <style lang="scss" scoped>
