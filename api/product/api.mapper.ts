@@ -2,8 +2,7 @@ import type { ProductApi, ProductDetailsApi } from "./api.model";
 import * as vm from "./api.vm";
 
 
-
-export const mapProductListToVM = (data: ProductApi): vm.Product => ({
+export const mapProductByCategoryToVM = (data: ProductApi): vm.Product => ({
     id: data.id,
     title: data.title,
     description: data.description,
@@ -14,8 +13,8 @@ export const mapProductListToVM = (data: ProductApi): vm.Product => ({
 })
 
 
-export const mapProductCollectionFromApiToVm = (productCollection: ProductApi[]): vm.Product[] =>
-  productCollection.map((product) => mapProductListToVM(product));
+export const mapProductsByCategoryFromApiToVm = (products: ProductApi[]): vm.Product[] =>
+products.map((product) => mapProductByCategoryToVM(product));
 
 
 export const mapProductDetailsToVM = (data: ProductDetailsApi): vm.ProductDetails => ({

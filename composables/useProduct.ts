@@ -1,9 +1,10 @@
-import { defaultProductDetail, getProductByIdApi, getProductsByCategoryApi, mapProductCollectionFromApiToVm, mapProductDetailsToVM, type Product, type ProductDetails } from "~/api";
+import { defaultProductDetail, getProductByIdApi, getProductsByCategoryApi, mapProductsByCategoryFromApiToVm, mapProductDetailsToVM, type Product, type ProductDetails } from "~/api";
 
 export const useProduct = () => {
 
-    let product = reactive<ProductDetails>(defaultProductDetail)
     let products = reactive<Product[]>([]);
+    let product = reactive<ProductDetails>(defaultProductDetail)
+
     const totalProducts = ref<number>(0);
     const isLoading = ref<boolean>(false);
     const hasError = ref<boolean>(false);
@@ -13,25 +14,22 @@ export const useProduct = () => {
             isLoading.value = true;
             const { data, hasError: hasErrorApi } = await getProductsByCategoryApi(category);
 
-            if (data) {
-                Object.assign(products, mapProductCollectionFromApiToVm(data.products));
-                totalProducts.value = data.total;
-            } else {
-                products = [];
-                totalProducts.value = 0
-            }
+            Object.assign(products, mapProductsByCategoryFromApiToVm(data.products));
+            totalProducts.value = data.totalProducts;
 
-            if (hasErrorApi) {
-                hasError.value = true;
-            }
+            if (hasErrorApi) handlingErrorsProductsByCategory();
 
         } catch (error) {
-            products = [];
-            totalProducts.value = 0
-            hasError.value = true;
+            handlingErrorsProductsByCategory();
         } finally {
             isLoading.value = false;
         }
+    }
+
+    const handlingErrorsProductsByCategory = (): void => {
+        products = [];
+        totalProducts.value = 0
+        hasError.value = true;
     }
 
 
@@ -57,7 +55,7 @@ export const useProduct = () => {
             isLoading.value = false;
         }
     }
-    
+
 
     return {
         // props

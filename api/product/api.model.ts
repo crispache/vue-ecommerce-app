@@ -1,5 +1,5 @@
 
-export interface ProductListApi {
+export interface ProductsByCategoryApi {
     products: ProductApi[];
     total:    number;
     skip:     number;
