@@ -1,11 +1,6 @@
 import type { ProductApi, ProductListApi } from "./api.model";
 
 
-interface CategoriesResponse {
-    data: string[] | null;
-    hasError?: boolean;
-}
-
 interface ProductsByCategorysResponse {
     data: ProductListApi | null;
     hasError?: boolean;
@@ -15,17 +10,6 @@ interface ProductByIdResponse {
     data: ProductApi | null;
     hasError?: boolean;
 }
-
-
-
-export const getCategoriesApi = async(): Promise<CategoriesResponse> => {
-    try {
-        const data = await $fetch<string[]>('https://dummyjson.com/products/categories');
-        return { data };
-    } catch (error) {
-        return { data: null, hasError: true}
-    }
-};
 
 
 export const getProductsByCategoryApi = async(category: string): Promise<ProductsByCategorysResponse> => {
