@@ -16,5 +16,8 @@
 </template>
 
 <script setup lang="ts">
-const userName = ref<string>('Pepe');
+import { useUserStore } from '~/store/useUserStore';
+
+const userStore = useUserStore();
+const { userName } = storeToRefs(userStore);
 </script>

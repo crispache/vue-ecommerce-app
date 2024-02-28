@@ -1,7 +1,9 @@
 import { defaultUserDetails, getUserDetailsApi, mapUserToVM, type UserDetailsEntity } from "~/api";
+import { useUserStore } from "~/store/useUserStore";
 
 export const useUser = () => {
 
+    const { setUserName } = useUserStore();
     let userDetails = reactive<UserDetailsEntity>(defaultUserDetails);
     const isLoading = ref<boolean>(false);
     const hasError = ref<boolean>(false);
@@ -22,6 +24,7 @@ export const useUser = () => {
         } catch (error) {
             handlingErrors();
         } finally {
+            setUserName(userDetails.name);
             isLoading.value = false;
         }
     }
