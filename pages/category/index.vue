@@ -1,8 +1,11 @@
 <template>
     <section>
+        <v-btn prepend-icon="mdi-arrow-left" variant="outlined" class="mb-5" to="/">
+            Volver al inicio
+        </v-btn>
         <h1> Listado de categorías </h1>
         <div class="category-list">
-            <v-card v-for="(category, index) in categories" :key="index" variant="text" height="255" width="250">
+            <v-card v-for="(category, index) in categories" :key="index" variant="text" height="255" width="270">
                 <v-card-item>
                     <NuxtLink :to="`/category/${category}`">
                     <v-img contain src="https://dummyimage.com/300x250/dbdede/0011ff.png&" :alt="`Foto de ${category}`"

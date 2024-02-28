@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="cover-info">
-            <h1> Hola, {{ user.name }} 👋 </h1>
+            <h1> Hola, {{ userDetails.name }} 👋 </h1>
             <p>
                 Lorem ipsum is placeholder text commonly used in the graphic, print, and publishing industries for
                 previewing layouts and visual mockups.
@@ -11,16 +11,15 @@
             </NuxtLink>
         </div>
         <div class="user-info">
-           <landing-cover-card :user="user"></landing-cover-card>
+           <landing-cover-card :user="userDetails"></landing-cover-card>
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
-import type { UserDetailEntity } from '~/api';
 
-// Props
-defineProps<{ user: UserDetailEntity }>()
+const { userDetails, getUserDetails } = useUser();
+await getUserDetails(1);
 
 </script>
 

@@ -1,5 +1,5 @@
 
-export interface UserDetailEntityApi {
+export interface UserDetailsEntityApi {
     id:         number;
     firstName:  string;
     lastName:   string;

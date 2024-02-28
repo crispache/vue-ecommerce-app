@@ -8,8 +8,8 @@
 </template>
 
 <script setup lang="ts">
-const { quote, getQuote } = useQuote();
-await getQuote();
+const { quote, getRandomQuote } = useQuote();
+await getRandomQuote();
 </script>
 
 <style lang="scss" scoped>

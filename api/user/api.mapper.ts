@@ -1,7 +1,7 @@
-import type { UserDetailEntityApi } from "./api.model";
+import type { UserDetailsEntityApi } from "./api.model";
 import * as vm from "./api.vm";
 
-export const mapUserToVM = (data: UserDetailEntityApi): vm.UserDetailEntity => ({
+export const mapUserToVM = (data: UserDetailsEntityApi): vm.UserDetailsEntity => ({
     id: data.id,
     name: data.username,
     photoUrl: data.image,

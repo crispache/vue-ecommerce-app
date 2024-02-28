@@ -31,10 +31,10 @@
 </template>
 
 <script setup lang="ts">
-import type { UserDetailEntity } from '~/api';
+import type { UserDetailsEntity } from '~/api';
 
 // Props
-defineProps<{ user: UserDetailEntity }>()
+defineProps<{ user: UserDetailsEntity }>()
 
 </script>
 

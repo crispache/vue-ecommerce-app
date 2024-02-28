@@ -1,4 +1,4 @@
-export interface UserDetailEntity {
+export interface UserDetailsEntity {
     id: number;
     name: string;
     photoUrl: string;
@@ -8,7 +8,7 @@ export interface UserDetailEntity {
 }
 
 
-export const defaultUserDetail = {
+export const defaultUserDetails = {
     id: 0,
     name: "",
     photoUrl: "",

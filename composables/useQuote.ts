@@ -6,27 +6,29 @@ export const useQuote = () => {
     const isLoading = ref<boolean>(false);
     const hasError = ref<boolean>(false);
 
-    const getQuote = async () => {
+    const getRandomQuote = async () => {
         try {
             isLoading.value = true;
-            const { data, hasError: hasErrorApi } =  await getRandomQuoteApi();
+            const { data, hasError } = await getRandomQuoteApi();
             
             if(data) {
                 Object.assign(quote, mapQuoteToVM(data));
             } else {
-                quote = defaultQuote
+                quote = defaultQuote;
             }
 
-            if(hasErrorApi) {
-                hasError.value = true;
-            }
+            if(hasError) handlingErrors();
            
         } catch (error) {
-            quote = defaultQuote
-            hasError.value = true;
+            handlingErrors();
         } finally {
             isLoading.value = false;
         }
+    }
+
+    const handlingErrors = () :void => {
+        quote = defaultQuote;
+        hasError.value = true;
     }
 
     return {
@@ -36,6 +38,6 @@ export const useQuote = () => {
         hasError,
 
         // methods
-        getQuote,
+        getRandomQuote,
     }
 }
