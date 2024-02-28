@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-const { categories, getCategories } = useProduct();
+const { categories, getCategories } = useCategory();
 await getCategories();
 
 </script>

@@ -1,5 +1,5 @@
 
-export interface ProductListApi {
+export interface ProductsByCategoryApi {
     products: ProductApi[];
     total:    number;
     skip:     number;
@@ -7,6 +7,21 @@ export interface ProductListApi {
 }
 
 export interface ProductApi {
+    id:                 number;
+    title:              string;
+    description:        string;
+    price:              number;
+    discountPercentage: number;
+    rating:             number;
+    stock:              number;
+    brand:              string;
+    category:           string;
+    thumbnail:          string;
+    images:             string[];
+}
+
+
+export interface ProductDetailsApi {
     id:                 number;
     title:              string;
     description:        string;

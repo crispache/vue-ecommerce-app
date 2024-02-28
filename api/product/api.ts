@@ -1,30 +1,31 @@
-import type { ProductListApi } from "./api.model";
+import type { ProductApi, ProductDetailsApi, ProductsByCategoryApi } from "./api.model";
 
-
-interface CategoriesResponse {
-    data: string[] | null;
+interface ProductsByCategoryResponse {
+    data: {
+        products: ProductApi[];
+        totalProducts: number;
+    }
     hasError?: boolean;
 }
 
-interface ProductsByCategorysResponse {
-    data: ProductListApi | null;
+interface ProductDetailsByIdResponse {
+    data: ProductDetailsApi | null;
     hasError?: boolean;
 }
 
 
-export const getCategoriesApi = async(): Promise<CategoriesResponse> => {
+export const getProductsByCategoryApi = async(category: string): Promise<ProductsByCategoryResponse> => {
     try {
-        const data = await $fetch<string[]>('https://dummyjson.com/products/categories');
-        return { data };
+        const data = await $fetch<ProductsByCategoryApi>(`https://dummyjson.com/products/category/${category}`);
+        return { data: { products: data.products, totalProducts: data.total }};
     } catch (error) {
-        return { data: null, hasError: true}
+        return { data: { products: [], totalProducts: 0 }, hasError: true}
     }
 };
 
-
-export const getProductsByCategoryApi = async(category: string): Promise<ProductsByCategorysResponse> => {
+export const getProductDetailsByIdApi = async(id: string): Promise<ProductDetailsByIdResponse> => {
     try {
-        const data = await $fetch<ProductListApi>(`https://dummyjson.com/products/category/${category}`);
+        const data = await $fetch<ProductDetailsApi>(`https://dummyjson.com/products/${id}`);
         return { data };
     } catch (error) {
         return { data: null, hasError: true}

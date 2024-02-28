@@ -1,74 +1,73 @@
-import { getCategoriesApi, getProductsByCategoryApi, mapProductCollectionFromApiToVm, type Product } from "~/api";
+import { defaultProductDetail, getProductDetailsByIdApi, getProductsByCategoryApi, mapProductsByCategoryFromApiToVm, mapProductDetailsToVM, type Product, type ProductDetails } from "~/api";
 
 export const useProduct = () => {
 
-    const categories = ref<string[]>([]);
     let products = reactive<Product[]>([]);
+    let productDetails = reactive<ProductDetails>(defaultProductDetail)
+
     const totalProducts = ref<number>(0);
     const isLoading = ref<boolean>(false);
     const hasError = ref<boolean>(false);
-
-    const getCategories = async () => {
-        try {
-            isLoading.value = true;
-            const { data, hasError: hasErrorApi } = await getCategoriesApi();
-
-            if (data) {
-                categories.value = [...data];
-            } else {
-                categories.value = []
-            }
-
-            if (hasErrorApi) {
-                hasError.value = true;
-            }
-
-        } catch (error) {
-            categories.value = []
-            hasError.value = true;
-        } finally {
-            isLoading.value = false;
-        }
-    }
-
 
     const getProductsByCategory = async (category: string) => {
         try {
             isLoading.value = true;
             const { data, hasError: hasErrorApi } = await getProductsByCategoryApi(category);
 
-            if (data) {
-                Object.assign(products, mapProductCollectionFromApiToVm(data.products));
-                totalProducts.value = data.total;
-            } else {
-                products = [];
-                totalProducts.value = 0
-            }
+            Object.assign(products, mapProductsByCategoryFromApiToVm(data.products));
+            totalProducts.value = data.totalProducts;
 
-            if (hasErrorApi) {
-                hasError.value = true;
-            }
+            if (hasErrorApi) handlingErrorsProductsByCategory();
 
         } catch (error) {
-            products = [];
-            totalProducts.value = 0
-            hasError.value = true;
+            handlingErrorsProductsByCategory();
         } finally {
             isLoading.value = false;
         }
     }
 
+    const handlingErrorsProductsByCategory = (): void => {
+        products = [];
+        totalProducts.value = 0
+        hasError.value = true;
+    }
+
+
+    const getProductDetailsById = async (id: string) => {
+        try {
+            isLoading.value = true;
+            const { data, hasError } = await getProductDetailsByIdApi(id);
+
+            if (data) {
+                Object.assign(productDetails, mapProductDetailsToVM(data));
+            } else {
+                productDetails = defaultProductDetail;
+            }
+
+            if (hasError) handlingErrorsProductDetailsById();
+
+        } catch (error) {
+            handlingErrorsProductDetailsById();
+        } finally {
+            isLoading.value = false;
+        }
+    }
+
+    const handlingErrorsProductDetailsById = (): void => {
+        productDetails = defaultProductDetail;
+        hasError.value = true;
+    }
 
     return {
         // props
-        categories,
         products,
         totalProducts,
+        productDetails,
         isLoading,
         hasError,
 
         // methods
-        getCategories,
-        getProductsByCategory
+        getProductsByCategory,
+        getProductDetailsById
     }
 }

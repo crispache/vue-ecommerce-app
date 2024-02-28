@@ -9,7 +9,7 @@
         </div>
         <div class="product-list">
             <article v-for="(product, index) in products" :key="index">
-                <v-card width="330" height="420" variant="text" hover>
+                <v-card width="330" height="420" variant="text" hover :to="`/product/${product.id}`">
                     <v-img contain height="235" :src="product.photoUrl"></v-img>
                     <v-card-item>
                         <v-card-title>{{ product.title }}</v-card-title>
