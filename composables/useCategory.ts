@@ -1,5 +1,9 @@
 import { getCategoriesApi } from "~/api";
 
+/*
+TODO: En el manejo de errores, incluiría también un mensaje de error según el error que se esté gestionando...
+*/
+
 export const useCategory = () => {
 
     const categories = ref<string[]>([]);

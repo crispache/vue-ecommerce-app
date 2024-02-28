@@ -15,6 +15,11 @@
 </template>
     
 <script setup lang="ts">
+
+/*
+TODO: Añadiría un spinner con la prop isLoading que está en el composable por si tarda la petición,
+y para que el usuario que la información se está cargando...(darle un feedback al usuario)
+*/
 const route = useRoute();
 const id = route.params.id as string;
 const { productDetails, getProductDetailsById } = useProduct();

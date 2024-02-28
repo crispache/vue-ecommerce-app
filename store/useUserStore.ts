@@ -1,4 +1,7 @@
 
+/*
+TODO: En esta Store se podría añadir más información, si hiciera falta...
+*/
 
 export const useUserStore = defineStore('user', () => {
 

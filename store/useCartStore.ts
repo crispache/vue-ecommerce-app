@@ -1,5 +1,8 @@
 import type { ProductDetails } from "~/api";
 
+/*
+TODO: En esta Store faltan más métodos como por ejemplo: vaciar carrito, eliminar algún producto del carrito, etc
+*/
 
 type CartItem = { quantity: number; data: ProductDetails }
 type CartItemRecord = Record<ProductDetails['id'], CartItem>

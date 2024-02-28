@@ -1,6 +1,10 @@
 import { defaultUserDetails, getUserDetailsApi, mapUserToVM, type UserDetailsEntity } from "~/api";
 import { useUserStore } from "~/store/useUserStore";
 
+/*
+TODO: En el manejo de errores, incluiría también un mensaje de error según el error que se esté gestionando...
+*/
+
 export const useUser = () => {
 
     const { setUserName } = useUserStore();

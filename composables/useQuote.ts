@@ -1,5 +1,9 @@
 import { defaultQuote, getRandomQuoteApi, mapQuoteToVM, type Quote } from "~/api";
 
+/*
+TODO: En el manejo de errores, incluiría también un mensaje de error según el error que se esté gestionando...
+*/
+
 export const useQuote = () => {
 
     let quote = reactive<Quote>(defaultQuote);
