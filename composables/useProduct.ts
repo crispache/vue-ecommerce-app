@@ -1,9 +1,9 @@
-import { defaultProductDetail, getProductByIdApi, getProductsByCategoryApi, mapProductsByCategoryFromApiToVm, mapProductDetailsToVM, type Product, type ProductDetails } from "~/api";
+import { defaultProductDetail, getProductDetailsByIdApi, getProductsByCategoryApi, mapProductsByCategoryFromApiToVm, mapProductDetailsToVM, type Product, type ProductDetails } from "~/api";
 
 export const useProduct = () => {
 
     let products = reactive<Product[]>([]);
-    let product = reactive<ProductDetails>(defaultProductDetail)
+    let productDetails = reactive<ProductDetails>(defaultProductDetail)
 
     const totalProducts = ref<number>(0);
     const isLoading = ref<boolean>(false);
@@ -33,40 +33,41 @@ export const useProduct = () => {
     }
 
 
-    const getProductById = async (id: string) => {
+    const getProductDetailsById = async (id: string) => {
         try {
             isLoading.value = true;
-            const { data, hasError: hasErrorApi } = await getProductByIdApi(id);
+            const { data, hasError } = await getProductDetailsByIdApi(id);
 
             if (data) {
-                Object.assign(product, mapProductDetailsToVM(data));
+                Object.assign(productDetails, mapProductDetailsToVM(data));
             } else {
-                product = defaultProductDetail;
+                productDetails = defaultProductDetail;
             }
 
-            if (hasErrorApi) {
-                hasError.value = true;
-            }
+            if (hasError) handlingErrorsProductDetailsById();
 
         } catch (error) {
-            product = defaultProductDetail;
-            hasError.value = true;
+            handlingErrorsProductDetailsById();
         } finally {
             isLoading.value = false;
         }
     }
 
+    const handlingErrorsProductDetailsById = (): void => {
+        productDetails = defaultProductDetail;
+        hasError.value = true;
+    }
 
     return {
         // props
         products,
         totalProducts,
-        product,
+        productDetails,
         isLoading,
         hasError,
 
         // methods
         getProductsByCategory,
-        getProductById
+        getProductDetailsById
     }
 }

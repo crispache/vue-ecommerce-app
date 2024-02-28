@@ -1,14 +1,14 @@
 <template>
     <article>
-        <v-btn prepend-icon="mdi-arrow-left" variant="outlined" class="mb-5" :to="`/category/${product.category}`">
+        <v-btn prepend-icon="mdi-arrow-left" variant="outlined" class="mb-5" :to="`/category/${productDetails.category}`">
             Listado de productos
         </v-btn>
         <div class="container">
             <div class="product-images">
-                <product-images-carousel :images="product.images"></product-images-carousel>
+                <product-images-carousel :images="productDetails.images"></product-images-carousel>
             </div>
             <div class="product-info">
-                <product-info-card :product="product"></product-info-card>
+                <product-info-card :product="productDetails"></product-info-card>
             </div>
         </div>
     </article>
@@ -17,9 +17,9 @@
 <script setup lang="ts">
 const route = useRoute();
 const id = route.params.id as string;
-const { product, getProductById } = useProduct();
+const { productDetails, getProductDetailsById } = useProduct();
 
-await getProductById(id)
+await getProductDetailsById(id)
 </script>
     
 <style lang="scss" scoped>

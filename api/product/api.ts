@@ -1,4 +1,4 @@
-import type { ProductApi, ProductsByCategoryApi } from "./api.model";
+import type { ProductApi, ProductDetailsApi, ProductsByCategoryApi } from "./api.model";
 
 interface ProductsByCategoryResponse {
     data: {
@@ -8,8 +8,8 @@ interface ProductsByCategoryResponse {
     hasError?: boolean;
 }
 
-interface ProductByIdResponse {
-    data: ProductApi | null;
+interface ProductDetailsByIdResponse {
+    data: ProductDetailsApi | null;
     hasError?: boolean;
 }
 
@@ -23,9 +23,9 @@ export const getProductsByCategoryApi = async(category: string): Promise<Product
     }
 };
 
-export const getProductByIdApi = async(id: string): Promise<ProductByIdResponse> => {
+export const getProductDetailsByIdApi = async(id: string): Promise<ProductDetailsByIdResponse> => {
     try {
-        const data = await $fetch<ProductApi>(`https://dummyjson.com/products/${id}`);
+        const data = await $fetch<ProductDetailsApi>(`https://dummyjson.com/products/${id}`);
         return { data };
     } catch (error) {
         return { data: null, hasError: true}
